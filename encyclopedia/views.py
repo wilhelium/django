@@ -9,6 +9,10 @@ def index(request):
     })
 
 def wiki_entry(request, page_title):
+    wiki_content = util.get_entry(page_title)
+    if wiki_content is None:
+        wiki_content = f"Error. There is no page for '{ page_title }'"
+
     return render(request, "encyclopedia/wikiPage.html", {
-        "markdown_content": util.get_entry(page_title)
+        "markdown_content": wiki_content
     })
